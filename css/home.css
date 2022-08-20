@@ -67,3 +67,9 @@ table, th, td{
   text-decoration: none;
   color: black;
 }
+
+a{
+  line-height: 37px; 
+  /* float: left;
+  margin-left: 4px; */
+}
