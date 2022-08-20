@@ -64,12 +64,13 @@
               </p>
             </div>
             <br><br>
-            <input type="button" class="button" value="BUY NOW">
+            <a href="../pages/confirmationPage.html">
+              <input type="button" class="button" value="BUY NOW">
+            </a>
           </center>
         </td>
       </tr>
     </table>
-
   </div>
 </body>
 <script>
@@ -82,16 +83,16 @@
     one_nft = {}
     one_nft = await $.ajax(
       "https://deep-index.moralis.io/api/v2/nft/" + token_address + "/" + token_id + "?chain=ropsten&format=decimal", {
-        type: 'get',
-        headers: {
-          'Accept': 'application/json',
-          'X-API-Key': 'AusQhcwVvbwSBi2oZFl5GjrlaV1HO5ron7huHPeLaxnc2HgKSpvEuSL1AgVa72SG'
-        },
-        success: function(data, status, xhr) {},
-        error: function(jqXhr, textStatus, errorMessage) {
-          alert("No applicant found")
-        }
-      })
+      type: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'X-API-Key': 'AusQhcwVvbwSBi2oZFl5GjrlaV1HO5ron7huHPeLaxnc2HgKSpvEuSL1AgVa72SG'
+      },
+      success: function (data, status, xhr) { },
+      error: function (jqXhr, textStatus, errorMessage) {
+        alert("No applicant found")
+      }
+    })
     const nft_img = document.querySelector('#nft-img')
     nft_img.src = one_nft?.token_uri
     nft_img.style.width = '200px'
