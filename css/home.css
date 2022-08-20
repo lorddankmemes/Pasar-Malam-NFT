@@ -51,3 +51,20 @@ nav {
 .nav-links a:hover:not(.active) {
   background-color: lightseagreen;
 }
+
+table, th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin: auto;
+
+}
+
+.kotak{
+  width: 50%;
+  text-align: center;
+}
+
+#nft{
+  text-decoration: none;
+  color: black;
+}
