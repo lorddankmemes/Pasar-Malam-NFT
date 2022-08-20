@@ -100,7 +100,7 @@
       const a_buy = document.createElement('a')
       const input_buy = document.createElement('input')
       const div_buy = document.createElement('div')
-      a_buy.setAttribute('href', "itemPage.html?token_address=" + nft?.token_address)
+      a_buy.setAttribute('href', "itemPage.html?token_address=" + nft?.token_address + "&token_id=" + nft?.token_id)
       input_buy.setAttribute('type', "button")
       input_buy.setAttribute('value', "Buy")
       input_buy.textContent = "Buy"
