@@ -1,47 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/yourcode.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/user.css" />
+    <title>Pasar Malam NFT</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="../css/home.css" />
-  <link rel="stylesheet" href="../css/user.css" />
-  <title>Pasar Malam NFT</title>
-</head>
-
-<body>
-  <nav>
-    <div class="heading">
-      <h4>Pasar Malam NFT</h4>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Connect Wallet</a></li>
-    </ul>
-  </nav>
-  <div>
-    <center>
-      <img src="https://picsum.photos/200/300" />
-      <br><br>
-      <p class="inset">Wallet Address</p>
-    </center>
-  </div>
-  <br><br>
-  <div class="container">
+  <body>
+    <nav>
+      <div class="heading">
+        <h4>Pasar Malam NFT</h4>
+      </div>
+      <ul class="nav-links">
+        <li class="enableEthereumButton"><a>Connect Wallet</a></li>
+      </ul>
+    </nav>
     <div>
-      <p class="filter">Filter:</p>
-      <button class="network">Network <i class="fa fa-filter"></i></button>&nbsp;&nbsp;
-      <button class="NFT">NFT <i class="fa fa-filter"></i></button>
-
+      <center>
+        <img src="https://picsum.photos/200/300" />
+        <br /><br />
+        <p class="showAccount"></p>
+      </center>
     </div>
-    <div class="search">
+
+    <br /><br />
+    <div class="container">
+      <div>
+        <p class="filter">Filter:</p>
+        <button class="network">Network <i class="fa fa-filter"></i></button
+        >&nbsp;&nbsp;
+        <button class="NFT">NFT <i class="fa fa-filter"></i></button>
+      </div>
+      <div class="search">
       <input type="text" placeholder="Search.." name="search2">
       <button type="submit"><i class="fa fa-search"></i></button>
     </div>
     <br><br>
+    
     <div class="flex-container" id="nft-list">
       <!-- <div class="grid-container">
         <div class="grid-item item1">
@@ -52,29 +59,34 @@
         <div class="grid-item item" style="margin-left: 30px;"><a href="itemPage.html"><input type="button" class="button" value="View"></a></div>
         <div class="grid-item item" style="margin-right: 30px;"><a href=""><input type="button" class="button" value="Buy"></a></div>
       </div> -->
+     </div>
     </div>
+  </body>
+  <script>
+    var list_nft = [];
+    const nft_list = document.querySelector("#nft-list");
+    const getListNft = async () => {
+      list_nft = [];
+      list_nft = await (
+        await $.ajax(
+          "https://deep-index.moralis.io/api/v2/0x2cc89791022Ed1abD62bfEac9B64d044a7aB5f26/nft?chain=ropsten&format=decimal",
+          {
+            type: "get",
+            headers: {
+              Accept: "application/json",
+              "X-API-Key":
+                "AusQhcwVvbwSBi2oZFl5GjrlaV1HO5ron7huHPeLaxnc2HgKSpvEuSL1AgVa72SG",
+            },
+            success: function (data, status, xhr) {},
+            error: function (jqXhr, textStatus, errorMessage) {
+              alert("No applicant found");
+            },
+          }
+        )
+      )?.result;
 
-  </div>
-</body>
-<script>
-  var list_nft = []
-  const nft_list = document.querySelector('#nft-list')
-  const getListNft = async () => {
-    list_nft = []
-    list_nft = await (await $.ajax(
-      "https://deep-index.moralis.io/api/v2/0x2cc89791022Ed1abD62bfEac9B64d044a7aB5f26/nft?chain=ropsten&format=decimal", {
-        type: 'get',
-        headers: {
-          'Accept': 'application/json',
-          'X-API-Key': 'AusQhcwVvbwSBi2oZFl5GjrlaV1HO5ron7huHPeLaxnc2HgKSpvEuSL1AgVa72SG'
-        },
-        success: function(data, status, xhr) {},
-        error: function(jqXhr, textStatus, errorMessage) {
-          alert("No applicant found")
-        }
-      }))?.result
-
-    for (const nft of list_nft) {
+      console.log(list_nft);
+      for (const nft of list_nft) {
       const div_grid_container = document.createElement('div')
 
       const img = document.createElement('img')
@@ -135,7 +147,23 @@
       nft_list.appendChild(div_grid_container)
     }
   }
-  getListNft()
+  getListNft() 
 </script>
 
+  <script>
+    const ethereumButton = document.querySelector(".enableEthereumButton");
+    const showAccount = document.querySelector(".showAccount");
+
+    ethereumButton.addEventListener("click", () => {
+      getAccount();
+    });
+
+    async function getAccount() {
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      const account = accounts[0];
+      showAccount.innerHTML = account;
+    }
+  </script>
 </html>

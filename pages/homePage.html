@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/home.css" />
     <title>Pasar Malam NFT</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <nav>
-        <div class="heading">
-            <h4>Pasar Malam NFT</h4>
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html">Connect Wallet</a></li>
-        </ul>
+      <div class="heading">
+        <h4>Pasar Malam NFT</h4>
+      </div>
+      <ul class="nav-links">
+        <li class="enableEthereumButton"><a>Connect Wallet</a></li>
+      </ul>
     </nav>
     <div class="body-text">
-        <center>
-            <h1>WELCOME TO<br>PASAR MALAM NFT</h1>
-        </center>
+      <center>
+        <h1>WELCOME TO<br />PASAR MALAM NFT</h1>
+      </center>
     </div>
     <br /><br />
     <div>
-        <table class="kotak">
-            <tr>
-                <th>
-                    No.
-                </th>
-                <th>
-                    List of NFT
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    1
-                </td>
-                <td>
-                    <a href="https://opensea.io/collection/black-future-collection-long-neckie-adira-by-nyla"
-                        id="nft">
-                        Black Future Collection: Long Neckie Adira by Nyla Hayes
-                    </a>
-                </td>
-            </tr>
-        </table>
+      <table class="kotak">
+        <tr>
+          <th>No.</th>
+          <th>List of NFT</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>
+            <a
+              href="https://opensea.io/collection/black-future-collection-long-neckie-adira-by-nyla"
+              id="nft"
+            >
+              Black Future Collection: Long Neckie Adira by Nyla Hayes
+            </a>
+          </td>
+        </tr>
+      </table>
     </div>
+  </body>
+  <script>
+    const ethereumButton = document.querySelector(".enableEthereumButton");
+    const showAccount = document.querySelector(".showAccount");
 
+    ethereumButton.addEventListener("click", () => {
+      getAccount();
+    });
 
-</body>
-
+    async function getAccount() {
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      const account = accounts[0];
+      showAccount.innerHTML = account;
+    }
+  </script>
 </html>
