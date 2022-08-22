@@ -34,6 +34,7 @@
         <p class="showAccount"></p>
       </center>
     </div>
+
     <br /><br />
     <div class="container">
       <div>
@@ -43,51 +44,22 @@
         <button class="NFT">NFT <i class="fa fa-filter"></i></button>
       </div>
       <div class="search">
-        <input type="text" placeholder="Search.." name="search2" />
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </div>
-      <br /><br />
-      <div class="flex-container" id="nft-list">
-        <div class="grid-container">
-          <div class="grid-item item1">
-            <img src="https://picsum.photos/200/300" />
-          </div>
-          <div class="grid-item item" style="margin-left: 30px">
-            <a href="itemPage.html"
-              ><input type="button" class="button" value="View"
-            /></a>
-          </div>
-          <div class="grid-item item" style="margin-right: 30px">
-            <a href=""><input type="button" class="button" value="Buy" /></a>
-          </div>
+      <input type="text" placeholder="Search.." name="search2">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </div>
+    <br><br>
+    
+    <div class="flex-container" id="nft-list">
+      <!-- <div class="grid-container">
+        <div class="grid-item item1">
+          <img src="https://picsum.photos/200/300" /> <br>
+          <p class="title">Long Neckie Adira: <br> Silver 120 Anniversary Editiono</p>
+          <p class="price"><b>$196.99</b></p>
         </div>
-        <div class="grid-container">
-          <div class="grid-item item1">
-            <img src="https://picsum.photos/200/300" />
-          </div>
-          <div class="grid-item item" style="margin-left: 30px">
-            <a href="itemPage.html"
-              ><input type="button" class="button" value="View"
-            /></a>
-          </div>
-          <div class="grid-item item" style="margin-right: 30px">
-            <a href=""><input type="button" class="button" value="Buy" /></a>
-          </div>
-        </div>
-        <div class="grid-container">
-          <div class="grid-item item1">
-            <img src="https://picsum.photos/200/300" />
-          </div>
-          <div class="grid-item item" style="margin-left: 30px">
-            <a href="itemPage.html"
-              ><input type="button" class="button" value="View"
-            /></a>
-          </div>
-          <div class="grid-item item" style="margin-right: 30px">
-            <a href=""><input type="button" class="button" value="Buy" /></a>
-          </div>
-        </div>
-      </div>
+        <div class="grid-item item" style="margin-left: 30px;"><a href="itemPage.html"><input type="button" class="button" value="View"></a></div>
+        <div class="grid-item item" style="margin-right: 30px;"><a href=""><input type="button" class="button" value="Buy"></a></div>
+      </div> -->
+     </div>
     </div>
   </body>
   <script>
@@ -115,10 +87,68 @@
 
       console.log(list_nft);
       for (const nft of list_nft) {
-      }
-    };
-    getListNft();
-  </script>
+      const div_grid_container = document.createElement('div')
+
+      const img = document.createElement('img')
+      const br1 = document.createElement('br')
+      const p_img = document.createElement('p')
+      const p_b_price = document.createElement('b')
+      const p_price = document.createElement('p')
+      const div_img = document.createElement('div')
+      img.src = nft?.token_uri
+      img.style.width = '200px'
+      img.style.height = '200px'
+      img.style.objectFit = 'cover'
+      p_img.textContent = nft?.name
+      p_img.classList.add('title')
+      p_b_price.textContent = "$196.99"
+      p_price.appendChild(p_b_price)
+      p_price.classList.add('price')
+      div_img.appendChild(img)
+      div_img.appendChild(br1)
+      div_img.appendChild(p_img)
+      div_img.appendChild(p_price)
+      div_img.classList.add('grid-item')
+      div_img.classList.add('item1')
+
+      const a_view = document.createElement('a')
+      const input_view = document.createElement('input')
+      const div_view = document.createElement('div')
+      a_view.setAttribute('href', "itemPage.html?token_address=" + nft?.token_address + "&token_id=" + nft?.token_id)
+      input_view.setAttribute('type', "button")
+      input_view.setAttribute('value', "View")
+      input_view.textContent = "View"
+      input_view.classList.add('button')
+      a_view.appendChild(input_view)
+      div_view.appendChild(a_view)
+      div_view.classList.add('grid-item')
+      div_view.classList.add('item')
+      div_view.style.marginLeft = '30px'
+
+      const a_buy = document.createElement('a')
+      const input_buy = document.createElement('input')
+      const div_buy = document.createElement('div')
+      a_buy.setAttribute('href', "itemPage.html?token_address=" + nft?.token_address + "&token_id=" + nft?.token_id)
+      input_buy.setAttribute('type', "button")
+      input_buy.setAttribute('value', "Buy")
+      input_buy.textContent = "Buy"
+      input_buy.classList.add('button')
+      a_buy.appendChild(input_buy)
+      div_buy.appendChild(a_buy)
+      div_buy.classList.add('grid-item')
+      div_buy.classList.add('item')
+      div_buy.style.marginRight = '30px'
+
+      div_grid_container.appendChild(div_img)
+      div_grid_container.appendChild(div_view)
+      div_grid_container.appendChild(div_buy)
+      div_grid_container.classList.add('grid-container')
+
+      nft_list.appendChild(div_grid_container)
+    }
+  }
+  getListNft() 
+</script>
 
   <script>
     const ethereumButton = document.querySelector(".enableEthereumButton");
